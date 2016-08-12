@@ -2,13 +2,13 @@
 session_start();
 $short = $_POST['short'];
 $password = $_POST['password'];
-$conn=new mysqli("localhost","root","12345","csc");
+$conn = new mysqli("mysql14.000webhost.com", "a6637786_pranav", "Hiitisme94", "a6637786_csc");
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT * FROM Profile where shortid ='".$short."'";
-if(($conn->query($sql))==true)
+$sql = 'SELECT * FROM Profile where short_id ="'.$short.'"';
+if(($result = $conn->query($sql))==true)
 {
     while($row = $result->fetch_array())
     {

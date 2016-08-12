@@ -15,7 +15,7 @@
         </a>
       </div>
       <ul class="nav navbar-nav navbar-right">
-      <li><a href="#"><?php echo $_SESSION["name"]; ?> </a></li>
+      <li><a href="#"><?php echo $_SESSION['name']; ?> </a></li>
       <li><a href="#">Logout</a></li>
     </ul>
     </div>
@@ -30,7 +30,7 @@
     <div class="col-md-4">
       <ul class="list-group list-unstyled">
         <li><input type="text" ng-model="name" placeholder="Enter the Name:" class="form-control"/></li>
-        <li class="list-group-item list-group-item-info" ng-repeat="contact in contacts | filter:name | orderBy:'name' ">
+        <li class="list-group-item list-group-item-info" ng-repeat="contact in ciscos | filter:name | orderBy:'name' ">
          <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp;{{contact.name}}&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-earphone"></span>&nbsp;&nbsp;&nbsp;{{contact.no}}
        </li>
      </div>
