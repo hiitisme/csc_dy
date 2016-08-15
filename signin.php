@@ -2,7 +2,7 @@
 session_start();
 $short = $_POST['short'];
 $password = $_POST['password'];
-$conn = new mysqli("mysql14.000webhost.com", "a6637786_pranav", "Hiitisme94", "a6637786_csc");
+require('database.php');
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
