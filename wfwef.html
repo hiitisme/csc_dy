@@ -1,0 +1,155 @@
+<html>
+<head>
+  <title>HS</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://cdn.rawgit.com/olton/Metro-UI-CSS/master/build/css/metro-icons.min.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
+  <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+
+</head>
+<body>
+  <script>
+      function onSuccess(googleUser) {
+        console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+      }
+      function onFailure(error) {
+        console.log(error);
+      }
+      function renderButton() {
+        gapi.signin2.render('my-signin2', {
+          'scope': 'profile email',
+          'width': 240,
+          'height': 50,
+          'longtitle': true,
+          'theme': 'dark',
+          'onsuccess': onSuccess,
+          'onfailure': onFailure
+        });
+      }
+    </script>
+
+    <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+  <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.5&appId=433699043439737";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+  <nav class="navbar navbar-default head">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <img class="navbar-brand img-responsive img-circle" src="img/icon.png">
+        <h2 class="name">Home Service</h2>
+      </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <li><button  class="btn btn-primary" data-toggle="modal" data-target="#signin">Singin</button></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+  <h2 class="text-center">Services</h2>
+  <div class="text-center"><span class="sercol"></span></div>
+    <div class="row service-top">
+      <div class="text-center col-md-offset-3 col-md-2 col-xs-offset-2 col-xs-3 service"><span class="mif-power-cord service-icon"></span><p class="service-name">Electrician</p></div>
+      <div class="text-center col-md-2 col-xs-3 service"><span class="mif-water service-icon"></span><p class="service-name">Plumber</p></div>
+      <div class="text-center col-md-2 col-xs-3 service"><span class="mif-hammer service-icon"></span><p class="service-name">carpenter</p></div>
+    </div>
+    <div class="row service-top">
+      <div class="text-center col-md-offset-3 col-md-2 col-xs-offset-2 col-xs-3 service"><span class="mif-paint service-icon"></span><p class="service-name">Painter</p></div>
+      <div class="text-center col-md-2 col-xs-3 service"><span class="mif-bug service-icon"></span><p class="service-name">Bug Control</p></div>
+      <div class="text-center col-md-2 col-xs-3 service"><span class="mif-tools service-icon"></span><p class="service-name">Mechanic</p></div>
+    </div>
+    <div class="row service-top">
+      <div class="text-center col-md-offset-3 col-md-2 col-xs-offset-2 col-xs-3 service"><span class="mif-palette service-icon"></span><p class="service-name">Interior designer</p></div>
+      <div class="text-center col-md-2 col-xs-3 service"><span class="mif-cab service-icon"></span><p class="service-name">Driver</p></div>
+      <div class="text-center col-md-2 col-xs-3 service"><span class="mif-insert-template  service-icon"></span><p class="service-name">Contractor</p></div>
+    </div>
+   </div>
+    <div style="margin-top:8%;">
+
+    </div>
+    <footer class="footer">
+      <div class="container">
+        <div class="row">
+          <ul class="text-left list-inline col-md-10" style="margin-top:2%;">
+            <li><a href="#">About us</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+          <p class="text-right col-md-2" style="margin-top:2%;">&copy; 2016 Homeservice</p>
+        </div>
+      </div>
+    </footer>
+    <div class="modal fade" id="signin" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title text-center">Signin</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+              <div class="col-md-6 formbor">
+                <div class="col-md-offset-1">
+                   <form method="post" name="signn" role="form" class="form-horizontal">
+                     <div class="form-group">
+                      <label for="email" class="col-md-3 control-label">Email:</label>
+                      <div class="col-md-8">
+                        <input type="email" class="form-control" name="email" id="email" placeholder="Enter Your mail:" required>
+                      </div>
+                     </div>
+                     <div class="form-group">
+                           <label for="pass" class="col-md-3 control-label">Password:</label>
+                        <div class="col-md-8">
+                           <input type="password" class="form-control" name="pass" id="pass" Placeholder="Enter your Password:" required>
+                        </div>
+                     </div>
+                     <div class="form-group">
+                       <label for="pass" class="col-md-3 control-label"></label>
+                       <div class="col-md-8">
+                          <p class="text-right"><a href="#">Forget Password ?</a></p>
+                       </div>
+                     </div>
+                     <input type="submit" value="signin" id="signin" class="btn btn-default center-block">
+                   </form>
+                  </div>
+              </div>
+              <div class="col-md-6 text-center">
+                <h3>Social network</h3>
+                <div class="row">
+                <div class="btn btn-lg fb-login-button" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="false"></div>
+              </div>
+                <div class="row">
+                  <img class="btn btn-lg" src="https://g.twimg.com/dev/sites/default/files/images_documentation/sign-in-with-twitter-gray.png" alt="Sign in with Twitter">
+                </div>
+                <div class="row">
+                  <div class="col-md-offset-3 g-signin2" data-width="200" data-height="30" data-longtitle="true">
+                </div>
+                <div class="row" style="margin-top:2%;">
+                  <img title="" style="width: 213px; height: 41px;" class="resource-paragraph-image lazy-load lazy-load-src" alt="Sign in with LinkedIn" src="//content.linkedin.com/content/dam/developer/global/en_US/site/img/signin-button.png" pagespeed_url_hash="1172473742" onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
+                </div>
+              </div>
+            </div>
+        </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+</body>
+</html>
