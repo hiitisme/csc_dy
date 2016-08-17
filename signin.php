@@ -7,7 +7,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = 'SELECT * FROM Profile where short_id ="'.$short.'"';
+$sql = 'SELECT * FROM profile where short_id ="'.$short.'"';
 if(($result = $conn->query($sql))==true)
 {
     while($row = $result->fetch_array())

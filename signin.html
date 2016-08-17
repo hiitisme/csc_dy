@@ -1,39 +1,78 @@
 <html>
 <head>
-  <title>The page for CSC</title>
+  <title>Login</title>
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
 </head>
 <body>
-  <nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="#">
-           CSC
-        </a>
-      </div>
-      <ul class="nav navbar-nav navbar-right">
-      <li><a href="#">Name</a></li>
-      <li><a href="#">Logout</a></li>
-    </ul>
-    </div>
-  </nav>
-  <div class="container">
-  <div class="row">
-    <div class="col-md-6 col-md-offset-3 ">
-    <form action="signin.php" method="post">
-  <div class="form-group">
-    <label for="short">Shortid</label>
-    <input type="text" class="form-control" id="short" placeholder="ShortID" name="short">
-  </div>
-  <div class="form-group">
-    <label for="pass">Password</label>
-    <input type="password" class="form-control" id="pass" placeholder="Password" name="password" >
-  </div>
-  <button type="submit" class="btn btn-default">Submit</button>
-</form>
-    </div>
-    </div>
-  </div>
 
+  <div class="container">
+  <div id="response" class="row">
+  </div>
+  <div class="row" style="margin-top:15%;">
+    <div class="col-md-3 col-md-offset-1" style="border: 1px #d8dee2 solid;">
+      <h1 class="text-center">Signup</h1>
+      <form id="signup">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="signup_name" placeholder="What's your Name??" required>
+      </div>
+      <div class="form-group">
+        <label for="short">Short ID</label>
+        <input type="text" class="form-control" id="signup_short" placeholder="What's your Short ID??" required>
+      </div>
+      <div class="form-group">
+        <label for="pass">Password</label>
+        <input type="password" class="form-control" id="signup_password" placeholder="***********" required>
+       </div>
+      <button type="submit"  class="btn btn-primary center-block">Join</button>
+      </form>
+    </div>
+    <div class="col-md-3 col-md-offset-4" style="border: 1px #d8dee2 solid;">
+      <h1 class="text-center">Signin</h1>
+      <form id="signin">
+      <div class="form-group">
+        <label for="short">Short ID</label>
+        <input type="text" class="form-control" id="short" placeholder="ShortID"  required>
+      </div>
+      <div class="form-group">
+        <label for="pass">Password</label>
+        <input type="password" class="form-control" id="password" placeholder="Password" required>
+       </div>
+      <button type="submit"  class="btn btn-primary center-block">Enter</button>
+      </form>
+    </div>
+  </div>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script type="text/javascript">
+  $(document).ready(function(){
+    $('#signup').submit(function(e){
+      e.preventDefault();
+      var name = $('#signup_name').val();
+      var short_id= $('#signup_short').val();
+      var password= $('#signup_password').val();
+      $.ajax({
+        url: "signup.php",
+        type: "POST",
+        data: "name="+name+"&short_id="+short_id+"&password="+password,
+        success: function(data,status,xhr){
+           $('#response').html(data);
+        }, }); });
+
+        $('#signin').submit(function(e){
+          e.preventDefault();
+          var short_id= $('#short').val();
+          var password= $('#password').val();
+          $.ajax({
+            url: "signin.php",
+            type: "POST",
+            data: "short="+short_id+"&password="+password,
+            success: function(data,status,xhr){
+               $('#response').html(data);
+            }, }); });
+  })
+  </script>
 </body>
 </html>
