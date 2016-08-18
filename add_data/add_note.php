@@ -2,10 +2,10 @@
   require('../database.php');
   session_start();
   $user_id = $_SESSION['user_id'];
-  $name = $_POST['name'];
-  $number = $_POST['cisco'];
+  $note = $_POST['note'];
+  $tag  = $_POST['tag'];
 
-  $sql = "INSERT INTO ciscos VALUES('$user_id','$name','$number')";
+  $sql = "INSERT INTO notes (note,user_id,tag) VALUES('$note','$user_id','$tag')";
   if(($conn->query($sql))==true)
   {
     echo "success";

@@ -17,7 +17,7 @@ if(($result = $conn->query($sql))==true)
           $_SESSION['user_id'] = $row['id'];
           $_SESSION['name'] = $row['name'];
           $_SESSION['short'] = $row['short_id'];
-          header('Location:index.php');
+          echo "success";
         }
         else {
           echo "Password Wrong";

@@ -1,4 +1,3 @@
-
 <?php
 SESSION_START();
 if(isset($_SESSION['user_id']))
@@ -22,7 +21,7 @@ if(isset($_SESSION['user_id']))
     }
     </style>
   </head>
-  <body>
+  <body ng-app="CscControl" ng-controller="cscctrl">
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -32,10 +31,12 @@ if(isset($_SESSION['user_id']))
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Brand</a>
+          <a class="navbar-brand" href="index.php"><span class="glyphicon glyphicon-home img-circle log-icon"></span></a>
+
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
+
             <li><img class="img-circle" src="img/profile.png" height="40" width="40"></li>
             <li><a href="profile.php"><?php echo $_SESSION['name']; ?></a></li>
             <li><a href="logout.php"><span class="glyphicon glyphicon-off log-icon"></span></a></li>
@@ -44,10 +45,24 @@ if(isset($_SESSION['user_id']))
       </div>
     </nav>
     <div class="container">
-      <div class="row" class="text-center" style="margin-top:20%;">
-        <div  class="text-center col-md-offset-3 col-md-2"><a href="sites.php"><span class="glyphicon glyphicon-globe cat-icon"></span></a></div>
-        <div  class="text-center col-md-2"><a href="contact.php"><span class="glyphicon glyphicon-earphone cat-icon"></span></a></div>
-        <div  class="text-center col-md-2"><a href="note.php"><span class="glyphicon glyphicon-list-alt cat-icon"></span></a></div>
+      <div class="row" class="text-center">
+        <div class="col-md-3">
+          <ul class="list-group">
+            <li class="list-group-item list-group-item-info" ng-repeat="site in sites | orderBy:'name' "><a target="_blank" href="{{site.link}}">{{site.name}}</a></li>
+          </ul>
+        </div>
+
+        <div class="col-md-3 col-md-offset-3">
+          <div id="error"></div>
+          <div class="row">
+            <form id="add_site" >
+              <input type="text" id="site_name" ng-model="site.name" class="form-control" placeholder="Enter the Name" required/></br>
+              <input type="text" id="site_url" ng-model="site.site_url" class="form-control" placeholder="Enter the URL" pattern="/d" required/></br>
+              <input type="submit" ng-click="add_site(site)" value="Add"  class="btn btn-primary center-block" />
+            </form>
+       </div>
+     </div>
+
       </div>
     </div>
 
@@ -55,7 +70,30 @@ if(isset($_SESSION['user_id']))
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/angular.min.js" ></script>
     <script type="text/javascript" src="js/controller.js"></script>
+    <script type="text/javascript">
 
+    $(document).ready(function(){
+      $('#add_site').submit(function(e){
+        e.preventDefault();
+        var name = $('#site_name').val();
+        var site_url= $('#site_url').val();
+        $.ajax({
+          url: "add_data/add_site.php",
+          type: "POST",
+          data: "name="+name+"&site_url="+site_url,
+          success: function(data,status,xhr){
+            if(data=="success"){
+              $('#site_name').val("");
+              $('#site_url').val("");
+            }
+            else{
+              $('#error').html("Try Again");
+            }
+          },
+        });
+      });
+    });
+    </script>
   </body>
   </html>
   <?php

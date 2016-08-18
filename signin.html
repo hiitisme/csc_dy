@@ -70,7 +70,13 @@
             type: "POST",
             data: "short="+short_id+"&password="+password,
             success: function(data,status,xhr){
-               $('#response').html(data);
+              if(data=="success"){
+                window.location="index.php";
+              }
+              else{
+              $('#response').html(data);
+              }
+
             }, }); });
   })
   </script>
