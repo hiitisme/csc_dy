@@ -29,7 +29,7 @@ $scope.add_note = function (note) {
  var note = note.note;
  var tag = note.tag;
   $scope.notes.push({
-    link  : site_url ,  name : name
+    note  : note ,  tag : tag
   });
 
 };

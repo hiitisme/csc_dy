@@ -1,6 +1,6 @@
-
 <?php
 SESSION_START();
+error_reporting(E_ERROR);
 if(isset($_SESSION['user_id']))
 {
   error_reporting(E_ERROR);

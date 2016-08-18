@@ -5,7 +5,7 @@
   $name = $_POST['name'];
   $number = $_POST['cisco'];
 
-  $sql = "INSERT INTO ciscos VALUES('$user_id','$name','$number')";
+  $sql = "INSERT INTO ciscos(user_id,name,number) VALUES('$user_id','$name','$number')";
   if(($conn->query($sql))==true)
   {
     echo "success";

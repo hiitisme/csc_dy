@@ -1,12 +1,13 @@
 <?php
 SESSION_START();
+ob_start();
 if(isset($_SESSION['user_id']))
 {
   error_reporting(E_ERROR);
   ?>
   <html>
   <head>
-    <title>Home</title>
+    <title>Sites</title>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <style>
     .cat-icon{
@@ -57,7 +58,7 @@ if(isset($_SESSION['user_id']))
           <div class="row">
             <form id="add_site" >
               <input type="text" id="site_name" ng-model="site.name" class="form-control" placeholder="Enter the Name" required/></br>
-              <input type="text" id="site_url" ng-model="site.site_url" class="form-control" placeholder="Enter the URL" pattern="/d" required/></br>
+              <input type="text" id="site_url" ng-model="site.site_url" class="form-control" placeholder="Enter the URL" required/></br>
               <input type="submit" ng-click="add_site(site)" value="Add"  class="btn btn-primary center-block" />
             </form>
        </div>

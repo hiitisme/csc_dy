@@ -6,7 +6,7 @@ if(isset($_SESSION['user_id']))
   ?>
   <html>
   <head>
-    <title>Home</title>
+    <title>Notes</title>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <style>
     .cat-icon{
@@ -67,9 +67,12 @@ if(isset($_SESSION['user_id']))
             </div>
           </form>
         </div>
+        <div class="col-md-2">
+          <input type="text" placeholder="Enter the tag name" class="form-control" ng-model="tag"/>
+        </div>
       </div>
       <div style="margin-top:5%">
-      <div class="panel panel-default col-md-5" ng-repeat="note in notes">
+      <div class="panel panel-default col-md-5" ng-repeat="note in notes | filter:tag" style="margin-left:5%;">
         <div class="panel-body notebor">
           <div class="row">
             <div class="col-md-11">

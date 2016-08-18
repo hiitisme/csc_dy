@@ -6,7 +6,7 @@ if(isset($_SESSION['user_id']))
   ?>
   <html>
   <head>
-    <title>Home</title>
+    <title>Contact</title>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <style>
     .cat-icon{
@@ -60,7 +60,7 @@ if(isset($_SESSION['user_id']))
           <div class="row">
             <form id="add_cisco">
               <input type="text" id="name" ng-model="cisco.name" class="form-control" placeholder="Enter the Name" required/></br>
-              <input type="text" id="cisco" ng-model="cisco.number" class="form-control" placeholder="Enter the Number" pattern="/d" required/></br>
+              <input type="text" id="cisco" ng-model="cisco.number" class="form-control" placeholder="Enter the Number" pattern="\d*" required/></br>
               <input type="submit" ng-click="add_cisco(cisco)" value="Add" class="btn btn-primary center-block" />
             </form>
        </div>
