@@ -12,7 +12,10 @@ if(($result = $conn->query($sql))==true)
 {
     while($row = $result->fetch_array())
     {
-        if($row['password'] == $password)
+      if ($row['id']==""){
+        echo '<div class="alert alert-danger" role="alert">You Are Not Registerd With US</div>';
+      }
+      elseif($row['password'] == $password)
         {
           $_SESSION['user_id'] = $row['id'];
           $_SESSION['name'] = $row['name'];
@@ -20,12 +23,12 @@ if(($result = $conn->query($sql))==true)
           echo "success";
         }
         else {
-          echo "Password Wrong";
+          echo '<div class="alert alert-danger" role="alert">Wrong password</div>';
         }
     }
   }
   else {
-    echo "table select error";
+    echo '<div class="alert alert-danger" role="alert">Sry Try Again</div>';
   }
 
 $conn->close();

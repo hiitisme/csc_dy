@@ -25,7 +25,7 @@
         <label for="pass">Password</label>
         <input type="password" class="form-control" id="signup_password" placeholder="***********" required>
        </div>
-      <button type="submit"  class="btn btn-primary center-block">Join</button>
+      <button type="submit" id="signup_button" class="btn btn-primary center-block">Join</button>
       </form>
     </div>
     <div class="col-md-3 col-md-offset-4" style="border: 1px #d8dee2 solid;">
@@ -54,10 +54,13 @@
       var short_id= $('#signup_short').val();
       var password= $('#signup_password').val();
       $.ajax({
-        url: "signup.php",
+        url: "add_data/signup.php",
         type: "POST",
         data: "name="+name+"&short_id="+short_id+"&password="+password,
         success: function(data,status,xhr){
+           $('#signup_name').val("");
+           $('#signup_short').val("");
+           $('#signup_password').val("");
            $('#response').html(data);
         }, }); });
 
@@ -78,6 +81,23 @@
               }
 
             }, }); });
+
+            $('#signup_short').blur(function(e){
+              e.preventDefault();
+              var short_id= $('#signup_short').val();
+              $.ajax({
+                url: "check/check_email.php",
+                type: "POST",
+                data: "short_id="+short_id,
+                success: function(data,status,xhr){
+                  if(data=="avail"){
+                  $('#response').html('<div class="alert alert-danger" role="alert">Ur Already Registerd With US try To login</div>');
+                  $('#signup_button').prop('disabled', true);}
+                  else{
+                     $('#signup_button').removeAttr("disabled");
+                     $('#response').html('');
+                  }
+                }, }); });
   })
   </script>
 </body>

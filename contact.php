@@ -60,7 +60,9 @@ if(isset($_SESSION['user_id']))
           <div class="row">
             <form id="add_cisco">
               <input type="text" id="name" ng-model="cisco.name" class="form-control" placeholder="Enter the Name" required/></br>
-              <input type="text" id="cisco" ng-model="cisco.number" class="form-control" placeholder="Enter the Number" pattern="\d*" required/></br>
+              <input type="text" id="cisco" ng-model="cisco.number" class="form-control" placeholder="Extension Number" pattern="\d*" required/></br>
+              <input type="text" id="mobile" ng-model="cisco.mobile_number" class="form-control" placeholder="Mobile Number" pattern="\d*" /></br>
+              <input type="text" id="short" ng-model="cisco.short_id" class="form-control" placeholder="Short ID" /></br>
               <input type="submit" ng-click="add_cisco(cisco)" value="Add" class="btn btn-primary center-block" />
             </form>
        </div>
@@ -78,16 +80,20 @@ if(isset($_SESSION['user_id']))
     $(document).ready(function(){
       $('#add_cisco').submit(function(e){
         e.preventDefault();
-        var name = $('#name').val();
-        var cisco= $('#cisco').val();
+        var name     = $('#name').val();
+        var cisco    = $('#cisco').val();
+        var mobile   = $('#mobile').val();
+        var short_id = $('#short').val();
         $.ajax({
           url: "add_data/add_cisco.php",
           type: "POST",
-          data: "name="+name+"&cisco="+cisco,
+          data: "name="+name+"&cisco="+cisco+"&mobile="+mobile+"&short_id="+short_id,
           success: function(data,status,xhr){
             if(data=="success"){
               $('#name').val("");
               $('#cisco').val("");
+              $('#mobile').val("");
+              $('#short').val("");
             }
             else{
               $('#error').html("Try Again");

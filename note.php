@@ -137,10 +137,27 @@ if(isset($_SESSION['user_id']))
           type: "POST",
           data: "note_id="+note_id,
           success: function(data,status,xhr){
-
               $('#note').val(data.notes.note);
               $('#tag').val(data.notes.tag);
           }, }); });
+
+          $('#update_note').submit(function(e){
+            e.preventDefault();
+            var note = $('#note').val();
+            var tag = $('#tag').val();
+            $.ajax({
+              url: "update/update_note.php",
+              type: "POST",
+              data: "note="+note+"&tag="+tag,
+              success: function(data,status,xhr){
+                if(data=="success"){
+                  $('#note').val("");
+                  $('#tag').val("");
+                }
+                else{
+                  $('#error').html("Try Again");
+                }
+              }, }); });
     });
     </script>
   </body>
