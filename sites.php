@@ -22,7 +22,7 @@ if(isset($_SESSION['user_id']))
     }
     </style>
   </head>
-  <body ng-app="CscControl" ng-controller="cscctrl">
+  <body ng-app="CscApp" ng-controller="sitectrl">
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -70,7 +70,7 @@ if(isset($_SESSION['user_id']))
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/angular.min.js" ></script>
-    <script type="text/javascript" src="js/controller.js"></script>
+    <script type="text/javascript" src="js/sitecontroller.js"></script>
     <script type="text/javascript">
 
     $(document).ready(function(){

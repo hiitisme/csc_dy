@@ -27,7 +27,7 @@ if(isset($_SESSION['user_id']))
 
     </style>
   </head>
-  <body ng-app="CscControl" ng-controller="cscctrl">
+  <body ng-app="CscApp" ng-controller="notectrl">
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -75,7 +75,7 @@ if(isset($_SESSION['user_id']))
       <div class="panel panel-default col-md-5" ng-repeat="note in notes | filter:tag" style="margin-left:5%;">
         <div class="panel-body notebor">
           <div class="row">
-            <div class="col-md-11">
+            <div class="col-md-10">
               <div class="row">
                 <div class="col-md-6">
                   {{note.created_time}}
@@ -84,6 +84,9 @@ if(isset($_SESSION['user_id']))
                   {{note.tag}}
                 </div>
               </div>
+            </div>
+            <div class="col-md-1">
+              <button type="button" class="note_edit" id="{{note.id}}"></span>
             </div>
             <div class="col-md-1">
               <button type="button" class="close" id="{{note.id}}"  aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -104,7 +107,7 @@ if(isset($_SESSION['user_id']))
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/angular.min.js" ></script>
-    <script type="text/javascript" src="js/controller.js"></script>
+    <script type="text/javascript" src="js/notecontroller.js"></script>
     <script type="text/javascript">
 
     $(document).ready(function(){
@@ -124,6 +127,19 @@ if(isset($_SESSION['user_id']))
             else{
               $('#error').html("Try Again");
             }
+          }, }); });
+
+      $('.note_edit').click(function(e){
+        e.preventDefault();
+        var note_id = $(this).attr('id');
+        $.ajax({
+          url: "data/get_note_edit.php",
+          type: "POST",
+          data: "note_id="+note_id,
+          success: function(data,status,xhr){
+
+              $('#note').val(data.notes.note);
+              $('#tag').val(data.notes.tag);
           }, }); });
     });
     </script>
