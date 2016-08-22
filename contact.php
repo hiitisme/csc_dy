@@ -80,6 +80,7 @@ if(isset($_SESSION['user_id']))
           <div id="error"></div>
           <div class="row">
             <form id="add_cisco">
+              <input type="hidden" id="cisco_id" />
               <input type="text" id="name" ng-model="cisco.name" class="form-control" placeholder="Enter the Name" required/></br>
               <input type="text" id="cisco" ng-model="cisco.number" class="form-control" placeholder="Extension Number" pattern="\d*" required/></br>
               <input type="text" id="mobile" ng-model="cisco.mobile_number" class="form-control" placeholder="Mobile Number" pattern="\d*" /></br>
@@ -108,6 +109,7 @@ if(isset($_SESSION['user_id']))
           type: "POST",
           data: "cisco_id="+cisco_id,
           success: function(data,status,xhr){
+              $('#cisco_id').val(data.id);
               $('#name').val(data.name);
               $('#cisco').val(data.no);
               $('#mobile').val(data.mobile);
@@ -127,7 +129,7 @@ if(isset($_SESSION['user_id']))
           $.ajax({
             url: "update/update_cisco.php",
             type: "POST",
-            data: "name="+name+"&cisco="+cisco+"&mobile="+mobile+"&short_id="+short,
+            data: "name="+name+"&cisco="+cisco+"&mobile="+mobile+"&short_id="+short+"&cisco_id="+cisco_id,
             success: function(data,status,xhr){
               if(data=="success"){
                 $('#name').val("");
