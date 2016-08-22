@@ -19,7 +19,7 @@ if(($result = $conn->query($sql))==true)
     $outp .= '"created_time":"'.$row["created_time"].'"}';
 }
 }
-$outp ='{"notes":['.$outp.']}';
+
 $conn->close();
 
 echo $outp;

@@ -49,7 +49,19 @@ if(isset($_SESSION['user_id']))
       <div class="row" class="text-center">
         <div class="col-md-3">
           <ul class="list-group">
-            <li class="list-group-item list-group-item-info" ng-repeat="site in sites | orderBy:'name' "><a target="_blank" href="{{site.link}}">{{site.name}}</a></li>
+            <li id={{site.id}} class="list-group-item list-group-item-info" ng-repeat="site in sites | orderBy:'name' ">
+              <div class="row">
+                <div class="col-md-9">
+                 <a target="_blank" href="{{site.link}}">{{site.name}}</a>
+                </div>
+                <div class="col-md-1">
+                 <div id={{site.id}} class="site_edit"><span class="glyphicon glyphicon-pencil"></span></div>
+                </div>
+                <div class="col-md-1">
+                 <div id={{site.id}} class="close" aria-label="Close"><span aria-hidden="true">&times;</span></div>
+                </div>
+              </div>
+            </li>
           </ul>
         </div>
 
@@ -57,9 +69,11 @@ if(isset($_SESSION['user_id']))
           <div id="error"></div>
           <div class="row">
             <form id="add_site" >
+              <input type="hidden" id="site_id" ng-model="site.id" /></br>
               <input type="text" id="site_name" ng-model="site.name" class="form-control" placeholder="Enter the Name" required/></br>
               <input type="text" id="site_url" ng-model="site.site_url" class="form-control" placeholder="Enter the URL" required/></br>
-              <input type="submit" ng-click="add_site(site)" value="Add"  class="btn btn-primary center-block" />
+              <input id="add_submit" type="submit" ng-click="add_site(site)" value="Add"  class="btn btn-primary center-block" />
+              <input id="edit_submit" type="submit" class="btn btn-primary center-block hidden" value="Update">
             </form>
        </div>
      </div>
@@ -74,25 +88,58 @@ if(isset($_SESSION['user_id']))
     <script type="text/javascript">
 
     $(document).ready(function(){
-      $('#add_site').submit(function(e){
+
+      $(document).on("click",".site_edit",function(e){
         e.preventDefault();
-        var name = $('#site_name').val();
-        var site_url= $('#site_url').val();
+        var site_id = $(this).attr('id');
         $.ajax({
-          url: "add_data/add_site.php",
+          url: "data/get_site_edit.php",
           type: "POST",
-          data: "name="+name+"&site_url="+site_url,
+          data: "site_id="+site_id,
           success: function(data,status,xhr){
-            if(data=="success"){
-              $('#site_name').val("");
-              $('#site_url').val("");
-            }
-            else{
-              $('#error').html("Try Again");
-            }
-          },
-        });
-      });
+              $('#site_name').val(data.name);
+              $('#site_url').val(data.link);
+              $('#site_id').val(data.id);
+              $('#add_site').prop('id', 'update_site');
+              $('#add_submit').addClass('hidden');
+              $('#edit_submit').removeClass('hidden');
+          }, }); });
+
+    $(document).on("submit","#update_site",function(e){
+          e.preventDefault();
+          var site_id = $('#site_id').val();
+          var site_name = $('#site_name').val();
+          var site_url = $('#site_url').val();
+          $.ajax({
+            url: "update/update_site.php",
+            type: "POST",
+            data: name"="+site_name+"&site_url="+site_url+"&site_id="+site_id,
+            success: function(data,status,xhr){
+              if(data=="success"){
+                $('#site_name').val("");
+                $('#site_url').val("");
+                $('#site_id').val("");
+                $('#edit_submit').addClass('hidden');
+                $('#add_submit').removeClass('hidden');
+                $('#update_site').prop('id', 'update_site');
+                $('#'+site_id+' .site_name').html(tag);
+                $('#'+site_id+' .site_url').html(note);
+              }
+              else{
+                $('#error').html("Try Again");
+              }
+            }, }); });
+
+      $(document).on("click",".close",function(e){
+        e.preventDefault();
+        var site_id = $(this).attr('id');
+        $.ajax({
+          url: "delete/site_delete.php",
+          type: "POST",
+          data: "site_id="+site_id,
+          success: function(data,status,xhr){
+              $('#'+site_id).remove();
+          }, }); });
     });
     </script>
   </body>

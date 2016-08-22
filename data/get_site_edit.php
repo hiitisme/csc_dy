@@ -12,12 +12,11 @@ if(($result = $conn->query($sql))==true)
   $outp = "";
     while($row = $result->fetch_array())
     {
-    if ($outp != "") {$outp .= ",";}
-    $outp .= '{"link":"'.$row["site"].'",';
-    $outp .= '"name":"'.$row["name"].'"}';
+      $outp .= '{"id":"'.$row["id"].'",';
+      $outp .= '"link":"'.$row["site"].'",';
+      $outp .= '"name":"'.$row["name"].'"}';
 }
 }
-$outp ='{"sites":['.$outp.']}';
 $conn->close();
 
 echo $outp;

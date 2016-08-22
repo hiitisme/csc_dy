@@ -12,7 +12,8 @@ if(($result = $conn->query($sql))==true)
     while($row = $result->fetch_array())
     {
     if ($outp != "") {$outp .= ",";}
-    $outp .= '{"link":"'.$row["site"].'",';
+    $outp .= '{"id":"'.$row["id"].'",';
+    $outp .= '"link":"'.$row["site"].'",';
     $outp .= '"name":"'.$row["name"].'"}';
 }
 }

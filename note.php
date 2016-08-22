@@ -59,20 +59,23 @@ if(isset($_SESSION['user_id']))
             </div>
             <div class="col-md-3">
               <div class="row">
+                <input type="hidden" id="note_id" ng-model="note.id" />
                 <input type="text" class="form-control" ng-model="note.tag" placeholder="Tag" id="tag" />
               </div><p></p>
               <div class="row">
-                 <input type="submit" ng-click="add_note(note)" class="btn btn-primary center-block" value="Add">
+                 <input id="edit_submit" type="submit" class="btn btn-primary center-block hidden" value="Update">
+                 <input id="add_submit" type="submit" ng-click="add_note(note)" class="btn btn-primary center-block" value="Add">
               </div>
             </div>
           </form>
         </div>
+      {{test}}
         <div class="col-md-2">
           <input type="text" placeholder="Enter the tag name" class="form-control" ng-model="tag"/>
         </div>
       </div>
       <div style="margin-top:5%">
-      <div class="panel panel-default col-md-5" ng-repeat="note in notes | filter:tag" style="margin-left:5%;">
+      <div class="panel panel-default col-md-5" ng-repeat="note in notes | filter:tag" style="margin-left:5%;" id="{{note.id}}">
         <div class="panel-body notebor">
           <div class="row">
             <div class="col-md-10">
@@ -80,13 +83,13 @@ if(isset($_SESSION['user_id']))
                 <div class="col-md-6">
                   {{note.created_time}}
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 note_tag">
                   {{note.tag}}
                 </div>
               </div>
             </div>
             <div class="col-md-1">
-              <button type="button" class="note_edit" id="{{note.id}}"></span>
+              <div class="note_edit" id="{{note.id}}"><span class="glyphicon glyphicon-pencil"></span></div>
             </div>
             <div class="col-md-1">
               <button type="button" class="close" id="{{note.id}}"  aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -95,7 +98,7 @@ if(isset($_SESSION['user_id']))
         </div>
         <div class="panel-body">
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 note_note">
               {{note.note}}
             </div>
           </div>
@@ -104,6 +107,7 @@ if(isset($_SESSION['user_id']))
     </div>
   </div>
 
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/angular.min.js" ></script>
@@ -111,25 +115,8 @@ if(isset($_SESSION['user_id']))
     <script type="text/javascript">
 
     $(document).ready(function(){
-      $('#add_note').submit(function(e){
-        e.preventDefault();
-        var note = $('#note').val();
-        var tag = $('#tag').val();
-        $.ajax({
-          url: "add_data/add_note.php",
-          type: "POST",
-          data: "note="+note+"&tag="+tag,
-          success: function(data,status,xhr){
-            if(data=="success"){
-              $('#note').val("");
-              $('#tag').val("");
-            }
-            else{
-              $('#error').html("Try Again");
-            }
-          }, }); });
 
-      $('.note_edit').click(function(e){
+      $(document).on("click",".note_edit",function(e){
         e.preventDefault();
         var note_id = $(this).attr('id');
         $.ajax({
@@ -137,27 +124,49 @@ if(isset($_SESSION['user_id']))
           type: "POST",
           data: "note_id="+note_id,
           success: function(data,status,xhr){
-              $('#note').val(data.notes.note);
-              $('#tag').val(data.notes.tag);
+              $('#note').val(data.note);
+              $('#tag').val(data.tag);
+              $('#note_id').val(data.id);
+              $('#add_note').prop('id', 'update_note');
+              $('#add_submit').addClass('hidden');
+              $('#edit_submit').removeClass('hidden');
           }, }); });
 
-          $('#update_note').submit(function(e){
-            e.preventDefault();
-            var note = $('#note').val();
-            var tag = $('#tag').val();
-            $.ajax({
-              url: "update/update_note.php",
-              type: "POST",
-              data: "note="+note+"&tag="+tag,
-              success: function(data,status,xhr){
-                if(data=="success"){
-                  $('#note').val("");
-                  $('#tag').val("");
-                }
-                else{
-                  $('#error').html("Try Again");
-                }
-              }, }); });
+    $(document).on("submit","#update_note",function(e){
+          e.preventDefault();
+          var note_id = $('#note_id').val();
+          var note = $('#note').val();
+          var tag = $('#tag').val();
+          $.ajax({
+            url: "update/update_note.php",
+            type: "POST",
+            data: "note="+note+"&tag="+tag+"&note_id="+note_id,
+            success: function(data,status,xhr){
+              if(data=="success"){
+                $('#note').val("");
+                $('#tag').val("");
+                $('#note_id').val("");
+                $('#edit_submit').addClass('hidden');
+                $('#add_submit').removeClass('hidden');
+                $('#update_note').prop('id', 'add_note');
+                $('#'+note_id+' .note_tag').html(tag);
+                $('#'+note_id+' .note_note').html(note);
+              }
+              else{
+                $('#error').html("Try Again");
+              }
+            }, }); });
+
+      $(document).on("click",".close",function(e){
+        e.preventDefault();
+        var note_id = $(this).attr('id');
+        $.ajax({
+          url: "delete/note_delete.php",
+          type: "POST",
+          data: "note_id="+note_id,
+          success: function(data,status,xhr){
+              $('#'+note_id).remove();
+          }, }); });
     });
     </script>
   </body>
