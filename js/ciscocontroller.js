@@ -4,13 +4,24 @@ CscControl.controller("ciscoctrl",function($scope,$http){
 $http.get("data/cisco.php").then(function (response) {$scope.ciscos = response.data.ciscos;});
 
 $scope.add_cisco = function (cisco) {
- var name = cisco.name;
- var number = cisco.number;
- var mobile = cisco.mobile_number;
- var short_id = cisco.short_id;
-  $scope.ciscos.push({
-    name  : name ,  no : number , mobile : mobile , short_id : short_id
-  });
+
+  $http({
+           method  : 'POST',
+           url     : 'add_data/add_cisco.php',
+           data    : cisco,
+           headers : {'Content-Type': 'application/x-www-form-urlencoded'}
+          })
+           .success(function(data) {
+             $scope.ciscos.push({
+               id :data.id , name  : data.name ,  no : data.number , mobile : data.mobile , short_id : data.short_id
+             });
+             $scope.cisco.number = "";
+             $scope.cisco.name  = "";
+             $scope.cisco.mobile_number  = "";
+             $scope.cisco.short_id  = "";
+           });
+         };
+
 
 };
 

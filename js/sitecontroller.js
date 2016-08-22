@@ -19,7 +19,4 @@ CscControl.controller("sitectrl",function($scope,$http){
             });
           };
 
-};
-
-
 });

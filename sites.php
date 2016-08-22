@@ -54,8 +54,10 @@ if(isset($_SESSION['user_id']))
                 <div class="col-md-9">
                  <a target="_blank" href="{{site.link}}">{{site.name}}</a>
                 </div>
-                <div class="col-md-1">
-                 <div id={{site.id}} class="site_edit"><span class="glyphicon glyphicon-pencil"></span></div>
+                <div ng-if="site.user_id != 0">
+                  <div class="col-md-1">
+                   <div id={{site.id}} class="site_edit"><span class="glyphicon glyphicon-pencil"></span></div>
+                  </div>
                 </div>
                 <div class="col-md-1">
                  <div id={{site.id}} class="close" aria-label="Close"><span aria-hidden="true">&times;</span></div>
@@ -122,8 +124,8 @@ if(isset($_SESSION['user_id']))
                 $('#edit_submit').addClass('hidden');
                 $('#add_submit').removeClass('hidden');
                 $('#update_site').prop('id', 'update_site');
-                $('#'+site_id+' .site_name').html(tag);
-                $('#'+site_id+' .site_url').html(note);
+                $('#'+site_id+' .site_name').html(site_name);
+                $('#'+site_id+' .site_url').html(site_url);
               }
               else{
                 $('#error').html("Try Again");

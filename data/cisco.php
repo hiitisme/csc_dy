@@ -12,7 +12,8 @@ if(($result = $conn->query($sql))==true)
     while($row = $result->fetch_array())
     {
     if ($outp != "") {$outp .= ",";}
-    $outp .= '{"name":"'.$row["name"].'",';
+    $outp .= '{"id":"'.$row["id"].'",';
+    $outp .= '"name":"'.$row["name"].'",';
     $outp .= '"no":"'.$row["number"].'",';
     $outp .= '"mobile":"'.$row["mobile"].'",';
     $outp .= '"short_id":"'.$row["short_id"].'"}';

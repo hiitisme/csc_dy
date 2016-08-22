@@ -10,7 +10,7 @@
   $sql = "INSERT INTO sites(user_id,site,name) VALUES('$user_id','$site_url','$name')";
   if(($conn->query($sql))==true)
   {
-    $sqll='SELECT * FROM notes WHERE id = (select MAX(id) from notes)';
+    $sqll='SELECT * FROM sites WHERE id = (select MAX(id) from notes)';
     if(($result = $conn->query($sqll))== true)
     {
       $outp = "";
