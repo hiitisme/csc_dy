@@ -52,17 +52,17 @@ if(isset($_SESSION['user_id']))
             <li id="dis_cisco" class="list-group-item list-group-item-info" ng-repeat="contact in ciscos | filter:name | orderBy:'name'" id={{contact.id}}>
               <div class="row">
                 <div class="col-md-3">
-                   <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp;{{contact.name}}
+                   <span id="con_name" class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp;{{contact.name}}
                 </div>
                 <div class="col-md-3">
-                   <span class="glyphicon glyphicon-phone-alt"></span>&nbsp;&nbsp;&nbsp;{{contact.no}}
+                   <span id="con_cisco" class="glyphicon glyphicon-phone-alt"></span>&nbsp;&nbsp;&nbsp;{{contact.no}}
                 </div>
                 <div class="col-md-3">
-                   <span class="glyphicon glyphicon-earphone"></span>&nbsp;&nbsp;&nbsp;{{contact.mobile}}
+                   <span id="con_mobile" class="glyphicon glyphicon-earphone"></span>&nbsp;&nbsp;&nbsp;{{contact.mobile}}
                 </div>
                 <div class="col-md-3">
                     <div class="col-md-10">
-                      <span class="glyphicon glyphicon-envelope"></span>&nbsp;&nbsp;&nbsp;{{contact.short_id}}
+                      <span id="con_short" class="glyphicon glyphicon-envelope"></span>&nbsp;&nbsp;&nbsp;{{contact.short_id}}
                     </div>
                      <div class="col-md-1">
                       <div id={{contact.id}} class="cisco_edit"><span class="glyphicon glyphicon-pencil"></span></div>
@@ -139,8 +139,10 @@ if(isset($_SESSION['user_id']))
                 $('#edit_submit').addClass('hidden');
                 $('#add_submit').removeClass('hidden');
                 $('#update_cisco').prop('id', 'add_cisco');
-                $('#'+cisco_id+' .site_name').html(site_name);
-                $('#'+cisco_id+' .site_url').html(site_url);
+                $('#'+cisco_id+' .con_name').html(name);
+                $('#'+cisco_id+' .con_mobile').html(mobile);
+                $('#'+cisco_id+' .con_cisco').html(cisco);
+                $('#'+cisco_id+' .con_short').html(short);
               }
               else{
                 $('#error').html("Try Again");
