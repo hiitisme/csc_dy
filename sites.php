@@ -125,7 +125,7 @@ if(isset($_SESSION['user_id']))
                 $('#site_id').val("");
                 $('#edit_submit').addClass('hidden');
                 $('#add_submit').removeClass('hidden');
-                $('#update_site').prop('id', 'update_site');
+                $('#update_site').prop('id', 'add_site');
                 $('#'+site_id+' .site_name').html(site_name);
                 $('#'+site_id+' .site_url').html(site_url);
               }

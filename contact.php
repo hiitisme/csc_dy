@@ -84,7 +84,8 @@ if(isset($_SESSION['user_id']))
               <input type="text" id="cisco" ng-model="cisco.number" class="form-control" placeholder="Extension Number" pattern="\d*" required/></br>
               <input type="text" id="mobile" ng-model="cisco.mobile_number" class="form-control" placeholder="Mobile Number" pattern="\d*" /></br>
               <input type="text" id="short" ng-model="cisco.short_id" class="form-control" placeholder="Short ID" /></br>
-              <input type="submit" ng-click="add_cisco(cisco)" value="Add" class="btn btn-primary center-block" />
+              <input id="add_submit"  type="submit" ng-click="add_cisco(cisco)" value="Add" class="btn btn-primary center-block" />
+              <input id="edit_submit" type="submit" class="btn btn-primary center-block hidden" value="Update">
             </form>
        </div>
      </div>
@@ -116,7 +117,7 @@ if(isset($_SESSION['user_id']))
               $('#edit_submit').removeClass('hidden');
           }, }); });
 
-    $(document).on("submit","#update_site",function(e){
+    $(document).on("submit","#update_cisco",function(e){
           e.preventDefault();
           var cisco_id = $('#cisco_id').val();
           var name = $('#name').val();
@@ -135,7 +136,7 @@ if(isset($_SESSION['user_id']))
                 $('#mobile').val("");
                 $('#edit_submit').addClass('hidden');
                 $('#add_submit').removeClass('hidden');
-                $('#update_cisco').prop('id', 'update_cisco');
+                $('#update_cisco').prop('id', 'add_cisco');
                 $('#'+cisco_id+' .site_name').html(site_name);
                 $('#'+cisco_id+' .site_url').html(site_url);
               }
