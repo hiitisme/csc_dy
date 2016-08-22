@@ -91,26 +91,60 @@ if(isset($_SESSION['user_id']))
     <script type="text/javascript">
 
     $(document).ready(function(){
-      $('#add_cisco').submit(function(e){
+      $(document).on("click",".cisco_edit",function(e){
         e.preventDefault();
-        var name     = $('#name').val();
-        var cisco    = $('#cisco').val();
-        var mobile   = $('#mobile').val();
-        var short_id = $('#short').val();
+        var cisco_id = $(this).attr('id');
         $.ajax({
-          url: "add_data/add_cisco.php",
+          url: "data/get_cisco_edit.php",
           type: "POST",
-          data: "name="+name+"&cisco="+cisco+"&mobile="+mobile+"&short_id="+short_id,
+          data: "cisco_id="+cisco_id,
           success: function(data,status,xhr){
-            if(data=="success"){
-              $('#name').val("");
-              $('#cisco').val("");
-              $('#mobile').val("");
-              $('#short').val("");
-            }
-            else{
-              $('#error').html("Try Again");
-            }
+              $('#name').val(data.name);
+              $('#cisco').val(data.no);
+              $('#mobile').val(data.mobile);
+              $('#short').val(data.short_id);
+              $('#add_cisco').prop('id', 'update_cisco');
+              $('#add_submit').addClass('hidden');
+              $('#edit_submit').removeClass('hidden');
+          }, }); });
+
+    $(document).on("submit","#update_site",function(e){
+          e.preventDefault();
+          var cisco_id = $('#cisco_id').val();
+          var name = $('#name').val();
+          var cisco = $('#cisco').val();
+          var mobile = $('#mobile').val();
+          var short = $('#short').val();
+          $.ajax({
+            url: "update/update_cisco.php",
+            type: "POST",
+            data: "name="+name+"&cisco="+cisco+"&mobile="+mobile+"&short_id="+short,
+            success: function(data,status,xhr){
+              if(data=="success"){
+                $('#name').val("");
+                $('#cisco').val("");
+                $('#short').val("");
+                $('#mobile').val("");
+                $('#edit_submit').addClass('hidden');
+                $('#add_submit').removeClass('hidden');
+                $('#update_cisco').prop('id', 'update_cisco');
+                $('#'+cisco_id+' .site_name').html(site_name);
+                $('#'+cisco_id+' .site_url').html(site_url);
+              }
+              else{
+                $('#error').html("Try Again");
+              }
+            }, }); });
+
+      $(document).on("click",".close",function(e){
+        e.preventDefault();
+        var cisco_id = $(this).attr('id');
+        $.ajax({
+          url: "delete/cisco_delete.php",
+          type: "POST",
+          data: "site_id="+site_id,
+          success: function(data,status,xhr){
+              $('#'+cisco_id).remove();
           }, }); });
     });
     </script>
