@@ -17,7 +17,7 @@ if(($result = $conn->query($sql))==true)
     $outp .= '"name":"'.$row["name"].'",';
     $outp .= '"no":"'.$row["number"].'",';
     $outp .= '"mobile":"'.$row["mobile"].'",';
-    $outp .= '"short_id":"'.$row["short_id"].'"}';
+    $outp .= '"short_id":"'.$row["shortid"].'"}';
 }
 }
 $conn->close();

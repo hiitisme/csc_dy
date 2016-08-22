@@ -49,7 +49,7 @@ if(isset($_SESSION['user_id']))
         <div class="col-md-6">
           <ul class="list-group list-unstyled">
             <li><input type="text" ng-model="name" placeholder="Enter the Name:" class="form-control"/></li>
-            <li id="dis_cisco" class="list-group-item list-group-item-info" ng-repeat="contact in ciscos | filter:name | orderBy:'name'" id={{contact.id}}>
+            <li class="list-group-item list-group-item-info" ng-repeat="contact in ciscos | filter:name | orderBy:'name'" id={{contact.id}}>
               <div class="row">
                 <div class="col-md-3">
                    <span class="con_name glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp;{{contact.name}}
