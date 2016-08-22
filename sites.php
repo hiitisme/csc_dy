@@ -59,8 +59,10 @@ if(isset($_SESSION['user_id']))
                    <div id={{site.id}} class="site_edit"><span class="glyphicon glyphicon-pencil"></span></div>
                   </div>
                 </div>
-                <div class="col-md-1">
-                 <div id={{site.id}} class="close" aria-label="Close"><span aria-hidden="true">&times;</span></div>
+                <div ng-if="site.user_id != 0">
+                  <div class="col-md-1">
+                   <div id={{site.id}} class="close" aria-label="Close"><span aria-hidden="true">&times;</span></div>
+                  </div>
                 </div>
               </div>
             </li>

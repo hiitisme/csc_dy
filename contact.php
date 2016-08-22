@@ -61,7 +61,15 @@ if(isset($_SESSION['user_id']))
                    <span class="glyphicon glyphicon-earphone"></span>&nbsp;&nbsp;&nbsp;{{contact.mobile}}
                 </div>
                 <div class="col-md-3">
-                   <span class="glyphicon glyphicon-envelope"></span>&nbsp;&nbsp;&nbsp;{{contact.short_id}}
+                    <div class="col-md-10">
+                      <span class="glyphicon glyphicon-envelope"></span>&nbsp;&nbsp;&nbsp;{{contact.short_id}}
+                    </div>
+                     <div class="col-md-1">
+                      <div id={{contact.id}} class="cisco_edit"><span class="glyphicon glyphicon-pencil"></span></div>
+                     </div>
+                     <div class="col-md-1">
+                      <div id={{contact.id}} class="close" aria-label="Close"><span aria-hidden="true">&times;</span></div>
+                     </div>
                 </div>
               </div>
            </li>
