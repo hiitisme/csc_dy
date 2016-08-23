@@ -112,6 +112,7 @@ if(isset($_SESSION['user_id']))
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/angular.min.js" ></script>
     <script type="text/javascript" src="js/notecontroller.js"></script>
+    <script type="text/javascript" src="js/analytic.js" ></script>
     <script type="text/javascript">
 
     $(document).ready(function(){

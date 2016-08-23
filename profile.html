@@ -1,13 +1,6 @@
-<?php
-SESSION_START();
-error_reporting(E_ERROR);
-if(isset($_SESSION['user_id']))
-{
-  error_reporting(E_ERROR);
-  ?>
   <html>
   <head>
-    <title>Home</title>
+    <title>Sites</title>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <style>
     .cat-icon{
@@ -22,7 +15,7 @@ if(isset($_SESSION['user_id']))
     }
     </style>
   </head>
-  <body>
+  <body ng-app="CscApp" ng-controller="sitectrl">
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -32,10 +25,12 @@ if(isset($_SESSION['user_id']))
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Brand</a>
+          <a class="navbar-brand" href="index.php"><span class="glyphicon glyphicon-home img-circle log-icon"></span></a>
+
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
+
             <li><img class="img-circle" src="img/profile.png" height="40" width="40"></li>
             <li><a href="profile.php"><?php echo $_SESSION['name']; ?></a></li>
             <li><a href="logout.php"><span class="glyphicon glyphicon-off log-icon"></span></a></li>
@@ -44,23 +39,32 @@ if(isset($_SESSION['user_id']))
       </div>
     </nav>
     <div class="container">
-      <div class="row" class="text-center" style="margin-top:20%;">
-        <div  class="text-center col-md-offset-3 col-md-2"><a href="sites.php"><span class="glyphicon glyphicon-globe cat-icon"></span></a></div>
-        <div  class="text-center col-md-2"><a href="contact.php"><span class="glyphicon glyphicon-earphone cat-icon"></span></a></div>
-        <div  class="text-center col-md-2"><a href="note.php"><span class="glyphicon glyphicon-list-alt cat-icon"></span></a></div>
-      </div>
+
+        <div class="col-md-5 col-md-offset-3" style="background-color:black;">
+          <div class="row">
+            <img src="img/profile.png" height="120" class="img-circle img-responsive center-block">
+          </div>
+          <div class="row">
+            <div class="col-md-6" style="background-color:blue;">
+              <p>Pranavadurai</p>
+              <p>Pranavadurai@gmail.com</p>
+            </div>
+            <div class="col-md-6" style="background-color:red;">
+              <ul>
+                <li>Change Password</li>
+                <li>Change Profile Pic</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/angular.min.js" ></script>
+    <script type="text/javascript" src="js/sitecontroller.js"></script>
     <script type="text/javascript" src="js/analytic.js" ></script>
-    <script type="text/javascript" src="js/controller.js"></script>
 
   </body>
   </html>
-  <?php
-}
-else {
-  header('Location:signin.html');
-} ?>
