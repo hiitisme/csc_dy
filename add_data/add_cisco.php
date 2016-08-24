@@ -11,7 +11,7 @@
   $sql = "INSERT INTO ciscos(user_id,name,number,mobile,shortid) VALUES('$user_id','$name','$number','$mobile','$short_id')";
   if(($conn->query($sql))==true)
   {
-    $sqll='SELECT * FROM sites WHERE id = (select MAX(id) from notes)';
+    $sqll='SELECT * FROM ciscos WHERE id = (select MAX(id) from ciscos)';
     if(($result = $conn->query($sqll))== true)
     {
       $outp = "";
