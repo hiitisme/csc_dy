@@ -5,8 +5,8 @@
   $post_date = file_get_contents("php://input");
   $data = json_decode($post_date);
   $name    = $data->name;
-  $number  = $data->cisco;
-  $mobile  = $data->mobile;
+  $number  = $data->number;
+  $mobile  = $data->mobile_number;
   $short_id= $data->short_id;
   $sql = "INSERT INTO ciscos(user_id,name,number,mobile,shortid) VALUES('$user_id','$name','$number','$mobile','$short_id')";
   if(($conn->query($sql))==true)
@@ -29,6 +29,6 @@
     }
   }
   else{
-    echo "error";
+    echo $conn->error;
   }
  ?>

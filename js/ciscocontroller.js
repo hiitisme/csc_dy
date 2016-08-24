@@ -13,7 +13,7 @@ $scope.add_cisco = function (cisco) {
           })
            .success(function(data) {
              $scope.ciscos.push({
-               id :data.id , name  : data.name ,  no : data.number , mobile : data.mobile , short_id : data.short_id
+               id :data.id , name  : data.name ,  no : data.no , mobile : data.mobile , short_id : data.short_id
              });
              $scope.cisco.number = "";
              $scope.cisco.name  = "";
@@ -23,6 +23,5 @@ $scope.add_cisco = function (cisco) {
          };
 
 
-};
 
 });

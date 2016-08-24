@@ -46,7 +46,7 @@ if(isset($_SESSION['user_id']))
     </nav>
     <div class="container">
       <div class="row" class="text-center">
-        <div class="col-md-6">
+        <div class="col-md-8">
           <ul class="list-group list-unstyled">
             <li><input type="text" ng-model="name" placeholder="Enter the Name:" class="form-control"/></li>
             <li class="list-group-item list-group-item-info" ng-repeat="contact in ciscos | filter:name | orderBy:'name'" id={{contact.id}}>
@@ -54,14 +54,14 @@ if(isset($_SESSION['user_id']))
                 <div class="col-md-3">
                    <span class="con_name glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp;{{contact.name}}
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
                    <span class="con_cisco glyphicon glyphicon-phone-alt"></span>&nbsp;&nbsp;&nbsp;{{contact.no}}
                 </div>
                 <div class="col-md-3">
                    <span  class="con_mobile glyphicon glyphicon-earphone"></span>&nbsp;&nbsp;&nbsp;{{contact.mobile}}
                 </div>
-                <div class="col-md-3">
-                    <div class="col-md-10">
+                <div class="col-md-4">
+                    <div class="col-md-9">
                       <span  class="con_short glyphicon glyphicon-envelope"></span>&nbsp;&nbsp;&nbsp;{{contact.short_id}}
                     </div>
                      <div class="col-md-1">
@@ -76,7 +76,7 @@ if(isset($_SESSION['user_id']))
          </div>
 
 
-        <div class="col-md-3 col-md-offset-2">
+        <div class="col-md-3">
           <div id="error"></div>
           <div class="row">
             <form id="add_cisco">
